@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+class AdminDashboard extends StatefulWidget {
+  const AdminDashboard({super.key});
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<AdminDashboard> createState() => _AdminDashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _AdminDashboardState extends State<AdminDashboard> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      
-    );
+    return const Scaffold();
   }
 }
