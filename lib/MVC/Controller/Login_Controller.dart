@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
+import 'package:localstorage/localstorage.dart';
 import '../View/Admin_Dashboard_Screen.dart';
 import '../View/Dashboard_Screen.dart';
 import '../View/showAlert.dart';
@@ -18,8 +18,8 @@ class LoginController{
       //    builder: (builder) => const AdminDashboard()));
       //  }else 
        if(data['password']==password){ //for users
-          Navigator.push(context,MaterialPageRoute(
-         builder: (builder) => const Dashboard()));
+       Navigator.push(context,MaterialPageRoute(builder: (builder) => const Dashboard()));
+       LocalStorage('evoting_app').setItem('cnic', cnic);
        }else{
         ShowAlert(context: context, title:'ERROR', description: 'Invalid Credentials').show();
        }

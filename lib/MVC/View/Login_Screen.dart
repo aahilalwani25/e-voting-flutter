@@ -3,6 +3,7 @@ import 'package:evoting_application/MVC/Model/NewUser.dart';
 import 'package:evoting_application/MVC/View/Dashboard_Screen.dart';
 import 'package:evoting_application/MVC/View/showAlert.dart';
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 
 import '../../ScreenDimensions.dart';
 import 'Signup_Screen.dart';
@@ -22,7 +23,10 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController pass= TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+   if(LocalStorage('evoting_app').getItem('cnic')??true) {
+     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Dashboard()));
+   }
+   return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
