@@ -1,4 +1,5 @@
 import 'package:evoting_application/MVC/View/Login_Screen.dart';
+import 'package:evoting_application/MVC/View/Request_Poll_Screen.dart';
 import 'package:evoting_application/MVC/View/Search.dart';
 import 'package:evoting_application/MVC/View/Theme.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,10 @@ class _DashboardState extends State<Dashboard> {
               ListTile(
                 title: const Text('Request Poll'),
                 leading: const Icon(Icons.where_to_vote),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (builder) => const RequestPollScreen()));
+                },
               ),
               ListTile(
                 title: const Text('View Results'),
