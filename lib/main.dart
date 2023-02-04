@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:evoting_application/MVC/Controller/LoginConfirm.dart';
+import 'package:evoting_application/MVC/Controller/MyLocalStorage.dart';
 import 'package:evoting_application/MVC/View/Dashboard_Screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: 
       (builder){
         //check if user is already logged in
-        if(LoginConfirm().confirm()){
+        if(MyLocalStorage().verify('cnic')){
           return const Dashboard();
         }
         return const LoginScreen();

@@ -1,6 +1,8 @@
+import 'package:evoting_application/MVC/View/Login_Screen.dart';
 import 'package:evoting_application/MVC/View/Search.dart';
 import 'package:evoting_application/MVC/View/Theme.dart';
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -10,34 +12,28 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-
-  bool dark_mode=false;
+  bool dark_mode = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       darkTheme: DarkTheme.getTheme(),
       home: Scaffold(
         drawer: Drawer(
-          child:ListView(
+          child: ListView(
             children: [
               DrawerHeader(
                 child: SizedBox(
                   height: 100,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Text('email here'),
-                      Text('cnic here')
-                    ],
+                    children: const [Text('email here'), Text('cnic here')],
                   ),
                 ),
               ),
               ListTile(
                 title: const Text('Profile'),
                 leading: const Icon(Icons.person),
-                onTap: (){
-    
-                },
+                onTap: () {},
               ),
               ListTile(
                 title: const Text('Cast your vote'),
@@ -48,7 +44,8 @@ class _DashboardState extends State<Dashboard> {
                 title: const Text('Search'),
                 leading: const Icon(Icons.search),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (builder)=>const Search()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (builder) => const Search()));
                 },
               ),
               ListTile(
@@ -64,24 +61,35 @@ class _DashboardState extends State<Dashboard> {
               ListTile(
                 title: const Text('Sign out'),
                 leading: const Icon(Icons.power_settings_new),
-                onTap: () {},
+                onTap: () {
+
+                  setState(() {
+                    LocalStorage('evoting_app').deleteItem('cnic');
+                  });
+                  
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (builder) {
+                    return const LoginScreen();
+                  }));
+                },
               ),
               ListTile(
                 title: Row(
                   children: [
                     const Text('Theme Mode'),
                     Switch(
-                      value: dark_mode, 
-                      onChanged: (value){
-                       setState(() {
-                         dark_mode=value;
-                         DarkTheme.setTheme(dark_mode);
-                       });
-    
-                    })
+                        value: dark_mode,
+                        onChanged: (value) {
+                          setState(() {
+                            dark_mode = value;
+                            DarkTheme.setTheme(dark_mode);
+                          });
+                        })
                   ],
                 ),
-                leading: dark_mode?const Icon(Icons.dark_mode): const Icon(Icons.light_mode),
+                leading: dark_mode
+                    ? const Icon(Icons.dark_mode)
+                    : const Icon(Icons.light_mode),
                 onTap: () {},
               ),
             ],
@@ -91,7 +99,6 @@ class _DashboardState extends State<Dashboard> {
           backgroundColor: Colors.green,
           title: const Text('Dashboard'),
         ),
-        
       ),
     );
   }

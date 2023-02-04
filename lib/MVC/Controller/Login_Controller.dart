@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evoting_application/MVC/Controller/MyLocalStorage.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import '../View/Admin_Dashboard_Screen.dart';
@@ -20,8 +21,9 @@ class LoginController {
       //   Navigator.push(context,MaterialPageRoute(
       //    builder: (builder) => const AdminDashboard()));
       //  }else
-      if (data['password'] == password) {
-        LocalStorage('evoting_app').setItem('cnic', cnic); //for users
+      if (data['password'] == password) { //for users
+        //LocalStorage('evoting_app').setItem('cnic', cnic); 
+        MyLocalStorage().set('cnic', cnic);
         Navigator.push(context,
             MaterialPageRoute(builder: (builder) => const Dashboard()));
       } else {
