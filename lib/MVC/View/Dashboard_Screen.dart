@@ -1,3 +1,4 @@
+import 'package:evoting_application/MVC/View/Search.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
@@ -8,6 +9,8 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+
+  bool dark_mode=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +42,13 @@ class _DashboardState extends State<Dashboard> {
               onTap: () {},
             ),
             ListTile(
+              title: const Text('Search'),
+              leading: const Icon(Icons.search),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (builder)=>const Search()));
+              },
+            ),
+            ListTile(
               title: const Text('Request Poll'),
               leading: const Icon(Icons.where_to_vote),
               onTap: () {},
@@ -53,10 +63,28 @@ class _DashboardState extends State<Dashboard> {
               leading: const Icon(Icons.power_settings_new),
               onTap: () {},
             ),
+            ListTile(
+              title: Row(
+                children: [
+                  const Text('Theme Mode'),
+                  Switch(
+                    value: dark_mode, 
+                    onChanged: (value){
+                     setState(() {
+                       dark_mode=value;
+                     });
+
+                  })
+                ],
+              ),
+              leading: dark_mode?const Icon(Icons.light_mode): const Icon(Icons.dark_mode),
+              onTap: () {},
+            ),
           ],
         ),
       ),
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: const Text('Dashboard'),
       ),
     );
