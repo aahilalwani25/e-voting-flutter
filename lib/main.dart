@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:evoting_application/MVC/Controller/LoginConfirm.dart';
+import 'package:evoting_application/MVC/View/Dashboard_Screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'MVC/View/Login_Screen.dart';
@@ -44,7 +46,14 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     Timer(const Duration(seconds: 5),(){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder)=>const LoginScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: 
+      (builder){
+        //check if user is already logged in
+        if(LoginConfirm().confirm()){
+          return const Dashboard();
+        }
+        return const LoginScreen();
+      }));
     });
   }
 
@@ -53,8 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
     double screenHeight=double.parse(MediaQuery.of(context).size.height.toString());
     double screenWidth=double.parse(MediaQuery.of(context).size.height.toString());
-
-
     return Scaffold(
       body: Center(
         child: Column(
@@ -63,18 +70,6 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: screenWidth,
               height: screenHeight,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('assets/images/election_commission_of_pakistan_logo.png',
-                    cacheWidth: 200,cacheHeight: 250,
-                    ),
-                  CircularProgressIndicator(
-                    color: Colors.white,
-                    strokeWidth: 5,
-                  )
-                ],
-              ),
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   //darken the image
@@ -82,6 +77,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   image: AssetImage('assets/images/background_image.png',),
                   fit: BoxFit.cover,
                 )
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/images/election_commission_of_pakistan_logo.png',
+                    cacheWidth: 200,cacheHeight: 250,
+                    ),
+                  const CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 5,
+                  )
+                ],
               ),
             )
           ],

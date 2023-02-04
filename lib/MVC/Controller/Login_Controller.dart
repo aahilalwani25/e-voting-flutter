@@ -5,27 +5,38 @@ import '../View/Admin_Dashboard_Screen.dart';
 import '../View/Dashboard_Screen.dart';
 import '../View/showAlert.dart';
 
-class LoginController{
-
-  static Future<void> getLogin(String cnic, String password, BuildContext context) async {
+class LoginController {
+  static Future<void> getLogin(
+      String cnic, String password, BuildContext context) async {
     Map<String, dynamic> data;
-    FirebaseFirestore.instance.collection('Users').doc(cnic).get()
-    .then((value){
-       data =value.data() as Map<String,dynamic>;
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(cnic)
+        .get()
+        .then((value) {
+      data = value.data() as Map<String, dynamic>;
 
       //  if(data['password']==password && data['CNIC']==cnic){
       //   Navigator.push(context,MaterialPageRoute(
       //    builder: (builder) => const AdminDashboard()));
-      //  }else 
-       if(data['password']==password){ //for users
-       Navigator.push(context,MaterialPageRoute(builder: (builder) => const Dashboard()));
-       LocalStorage('evoting_app').setItem('cnic', cnic);
-       }else{
-        ShowAlert(context: context, title:'ERROR', description: 'Invalid Credentials').show();
-       }
-    })
-    .onError((error, stackTrace) {
-      ShowAlert(context: context, title:'ERROR', description: 'Invalid Credentials').show();
+      //  }else
+      if (data['password'] == password) {
+        LocalStorage('evoting_app').setItem('cnic', cnic); //for users
+        Navigator.push(context,
+            MaterialPageRoute(builder: (builder) => const Dashboard()));
+      } else {
+        ShowAlert(
+                context: context,
+                title: 'ERROR',
+                description: 'Invalid Credentials')
+            .show();
+      }
+    }).onError((error, stackTrace) {
+      ShowAlert(
+              context: context,
+              title: 'ERROR',
+              description: 'Invalid Credentials')
+          .show();
     });
   }
 }

@@ -23,9 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController pass= TextEditingController();
   @override
   Widget build(BuildContext context) {
-   if(LocalStorage('evoting_app').getItem('cnic')??true) {
-     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Dashboard()));
-   }
    return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -134,7 +131,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               //login code
                               LoginController.getLogin(cnic.text, pass.text, context);
                               //LoginController.getLogin(cnic.text, pass.text);
-                              
                             }, child: const Text('LOGIN', style: TextStyle(fontSize: 20),),
 
                           )
