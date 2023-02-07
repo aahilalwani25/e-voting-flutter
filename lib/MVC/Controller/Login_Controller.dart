@@ -1,16 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
+import '../Model/Save.dart';
 import '../View/Admin_Dashboard_Screen.dart';
 import '../View/Dashboard_Screen.dart';
 import '../View/showAlert.dart';
 
 class LoginController {
+
+  //login as user
   static Future<void> loginAsAdmin(
       String cnic, String password, BuildContext context) async {
     Map<String, dynamic> data;
     FirebaseFirestore.instance
-        .collection('Users')
+        .collection('Admin')
         .doc(cnic)
         .get()
         .then((value) {
@@ -23,13 +26,15 @@ class LoginController {
       if (data['password'] == password) {
         //for users
         //LocalStorage('evoting_app').setItem('cnic', cnic);
+
+        Save().saveString("cnic", cnic);
         Navigator.push(context,
-            MaterialPageRoute(builder: (builder) => const Dashboard()));
+            MaterialPageRoute(builder: (builder) => const AdminDashboard()));
       } else {
         ShowAlert(
                 context: context,
                 title: 'ERROR',
-                description: 'Invalid Credentials')
+                description: 'Either username or password is wrong')
             .show();
       }
     }).onError((error, stackTrace) {
@@ -41,6 +46,8 @@ class LoginController {
     });
   }
 
+
+  //login as user
   static Future<void> getLogin(
       String cnic, String password, BuildContext context) async {
     Map<String, dynamic> data;

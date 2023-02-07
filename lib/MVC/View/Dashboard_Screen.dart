@@ -1,7 +1,7 @@
 import 'package:evoting_application/MVC/View/Login_Screen.dart';
 import 'package:evoting_application/MVC/View/Request_Poll_Screen.dart';
 import 'package:evoting_application/MVC/View/Search.dart';
-import 'package:evoting_application/MVC/View/Theme.dart';
+import 'package:evoting_application/MVC/Model/Theme.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 
@@ -13,6 +13,8 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+
+
   bool dark_mode = false;
   @override
   Widget build(BuildContext context) {
