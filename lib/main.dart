@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:evoting_application/MVC/Controller/MyLocalStorage.dart';
 import 'package:evoting_application/MVC/View/Dashboard_Screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -45,13 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
     // TODO: implement initState
     super.initState();
 
+
+
     Timer(const Duration(seconds: 5),(){
       Navigator.pushReplacement(context, MaterialPageRoute(builder: 
       (builder){
-        //check if user is already logged in
-        if(MyLocalStorage().verify('cnic')){
-          return const Dashboard();
-        }
+        //check if user is already logged i
         return const LoginScreen();
       }));
     });

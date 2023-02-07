@@ -14,4 +14,5 @@ class NewUser {
       required this.active
       }
       );
+      
 }

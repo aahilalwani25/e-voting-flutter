@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evoting_application/MVC/Controller/Signup_Controller.dart';
 import 'package:evoting_application/MVC/View/Login_Screen.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,32 @@ class _SignupScreenState extends State<SignupScreen> {
   //TextEditingController cnic= TextEditingController();
 
   String dob=DateTime.now().toString();
+
+  bool getPhone(Map<String, dynamic> userData, BuildContext context) {
+    bool check = false;
+    Map<String, dynamic> data;
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userData['CNIC'])
+        .get()
+        .then((value) => {
+              data = value.data() as Map<String, dynamic>,
+              if (data['phone'] == userData['phone'])
+                {
+                  // ShowAlert(
+                  //       context: context,
+                  //       description: 'Phone already registered',
+                  //       title: 'ERROR')
+                  //   .show()
+
+                  setState((){
+                    check = true;
+                  })
+                }
+            });
+
+    return check;
+  }
 
 
   @override
@@ -359,6 +386,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               email: email.text,
                             );
 
+                            //if(getPhone(user, context))
                             SignupController().firebaseSignUp(u, context);
                           },
                           child: const Text(

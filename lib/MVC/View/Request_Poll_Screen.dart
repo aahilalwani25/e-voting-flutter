@@ -1,6 +1,7 @@
 import 'package:evoting_application/MVC/View/Dashboard_Screen.dart';
 import 'package:evoting_application/MVC/View/Theme.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RequestPollScreen extends StatefulWidget {
   const RequestPollScreen({super.key});
@@ -51,7 +52,7 @@ class _RequestPollScreenState extends State<RequestPollScreen> {
                   borderRadius: const BorderRadius.all(Radius.circular(10))),
               child: TextField(
                 controller: cnic,
-                style: const TextStyle(color: Colors.black),
+                //style: const TextStyle(color: Colors.black),
                 decoration: const InputDecoration(
                   labelText: 'CNIC',
                   fillColor: Colors.grey,
@@ -68,8 +69,23 @@ class _RequestPollScreenState extends State<RequestPollScreen> {
           Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
-                child: ElevatedButton(onPressed: (){}
-                , child: const Text('REQUEST')),
+                child: ElevatedButton(
+                  onPressed: (){
+                    //toast message that your request is sent. You'll soon receive 
+                    //poll station message
+
+                    Fluttertoast.showToast(
+                      msg: "You'll soon receive an SMS message about the polling station details",
+                      gravity: ToastGravity.BOTTOM,
+                      toastLength: Toast.LENGTH_LONG,
+                      textColor: Colors.white,
+                      backgroundColor: Colors.green,
+                      timeInSecForIosWeb: 6,
+                    );
+
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (builder)=>const Dashboard()));
+                  }
+                  , child: const Text('REQUEST')),
               ),
         ],
       ),

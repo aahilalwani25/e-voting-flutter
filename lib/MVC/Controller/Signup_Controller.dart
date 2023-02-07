@@ -11,10 +11,27 @@ class SignupController {
 
   calculateAge(DateTime dob) {}
 
-  // Future<bool> getPhone(Map<String, dynamic> userData, BuildContext context) {
-  //   //Future<QuerySnapshot<Map<String, dynamic>>> snapshot = firebaseInstance.where('phone',isEqualTo: userData['phone']).get();
+  // bool getPhone(Map<String, dynamic> userData, BuildContext context) {
 
-  //   FirebaseAuth.instance.signInWithPhoneNumber()
+  //   bool check=false;
+  //   Map<String, dynamic> data;
+  //   FirebaseFirestore.instance
+  //   .collection('Users')
+  //   .doc(userData['CNIC'])
+  //   .get()
+  //   .then((value) => {
+  //     data=value.data() as Map<String,dynamic>,
+  //     if(data['phone']==userData['phone']){
+  //       // ShowAlert(
+  //       //       context: context,
+  //       //       description: 'Phone already registered',
+  //       //       title: 'ERROR')
+  //       //   .show()
+  //       check=true
+  //     }
+  //   });
+
+  //   return check;
   // }
 
   //check if cnic (i.e documentID) exists or not
@@ -36,6 +53,8 @@ class SignupController {
       'password': user.password,
     };
 
+    //getPhone(userData, context);
+
     // ignore: use_build_context_synchronously
     if (await getCNIC(userData, context)) {
       // ignore: use_build_context_synchronously
@@ -44,7 +63,15 @@ class SignupController {
               description: 'CNIC already registered',
               title: 'ERROR')
           .show();
-    } else {
+    // ignore: use_build_context_synchronously
+    // } else if(getPhone(userData, context)){
+    //   // ignore: use_build_context_synchronously
+    //   ShowAlert(
+    //         context: context,
+    //         description: 'Phone already registered',
+    //         title: 'ERROR')
+    //     .show();
+    }else {
      firebaseInstance
           .doc(userData['CNIC'])
           .set(userData)
