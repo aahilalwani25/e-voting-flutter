@@ -1,3 +1,4 @@
+import 'package:evoting_application/MVC/View/Cast_Your_Vote_Screen.dart';
 import 'package:evoting_application/MVC/View/Login_Screen.dart';
 import 'package:evoting_application/MVC/View/Request_Poll_Screen.dart';
 import 'package:evoting_application/MVC/View/Search.dart';
@@ -41,7 +42,10 @@ class _DashboardState extends State<Dashboard> {
               ListTile(
                 title: const Text('Cast your vote'),
                 leading: const Icon(Icons.how_to_vote_sharp),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (builder) => const Cast_Your_Vote_Screen()));
+                },
               ),
               ListTile(
                 title: const Text('Search'),

@@ -382,7 +382,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               active: active,
                               DOB: dob,
                               full_name: full_name.text,
-                              phone: BigInt.parse(phone.text),
+                              phone: BigInt.parse('+92${phone.text}'),
                               email: email.text,
                             );
 
