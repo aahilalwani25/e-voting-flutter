@@ -4,9 +4,17 @@ class Save{
 
   //Save(this.save);
 
-  saveString(String key, String value) async{
+  late final save;
+  //Save(this.save);
+
+  // initializeState()async{
+  //   save= await SharedPreferences.getInstance();
+  // }
+
+  Future<void> saveString(String key, String value) async {
     final save = await SharedPreferences.getInstance();
-    save.setString(key,value);
+    //final save2 = save;
+    await save.setString(key,value);
   }
 
   Future<String?> getString(String key) async{

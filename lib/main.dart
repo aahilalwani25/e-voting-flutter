@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:evoting_application/MVC/View/Dashboard_Screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'MVC/Model/Save.dart';
 import 'MVC/View/Login_Screen.dart';
 import 'package:flutter/material.dart';
 
@@ -50,6 +51,20 @@ class _MyHomePageState extends State<MyHomePage> {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: 
       (builder){
         //check if user is already logged i
+        bool check=false;
+
+        Save().getString("cnic")
+        .then((value) => {
+          if(value!=null){
+            setState((){
+              check=true;
+            })
+          }
+        });
+
+        if(check){
+          return const Dashboard();
+        }
         return const LoginScreen();
       }));
     });

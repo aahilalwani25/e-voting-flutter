@@ -79,8 +79,11 @@ class _RequestPollScreenState extends State<RequestPollScreen> {
                     onPressed: () {
                       //toast message that your request is sent. You'll soon receive
                       //poll station message
-
-                      Save().getString("cnic").then((value) => {
+                      Save save= Save();
+                      //save.initializeState();
+                      save.getString("cnic")
+                      .then((value) => {
+                        print(value),
                             if (value != cnic.text)
                               {
                                 Fluttertoast.showToast(
@@ -93,22 +96,24 @@ class _RequestPollScreenState extends State<RequestPollScreen> {
                                   timeInSecForIosWeb: 6,
                                 )
                               }
+                            else
+                              {
+                                Fluttertoast.showToast(
+                                  msg:
+                                      "You'll soon receive an SMS message about the polling station details",
+                                  gravity: ToastGravity.BOTTOM,
+                                  toastLength: Toast.LENGTH_LONG,
+                                  textColor: Colors.white,
+                                  backgroundColor: Colors.green,
+                                  timeInSecForIosWeb: 6,
+                                ),
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (builder) =>
+                                            const Dashboard()))
+                              }
                           });
-
-                      Fluttertoast.showToast(
-                        msg:
-                            "You'll soon receive an SMS message about the polling station details",
-                        gravity: ToastGravity.BOTTOM,
-                        toastLength: Toast.LENGTH_LONG,
-                        textColor: Colors.white,
-                        backgroundColor: Colors.green,
-                        timeInSecForIosWeb: 6,
-                      );
-
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (builder) => const Dashboard()));
                     },
                     child: const Text('REQUEST')),
               ),

@@ -27,7 +27,9 @@ class LoginController {
         //for users
         //LocalStorage('evoting_app').setItem('cnic', cnic);
 
-        Save().saveString("cnic", cnic);
+        Save save=Save();
+        //save.initializeState();
+        save.saveString("cnic", cnic);
         Navigator.push(context,
             MaterialPageRoute(builder: (builder) => const AdminDashboard()));
       } else {
